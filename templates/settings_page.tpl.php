@@ -3,7 +3,7 @@
 ?>
 <div class="wrap">
 	<div class="icon32 icon32-posts-page" id="icon-edit"><br></div>
-	<h2><?php _e('Just Variables', JV_TEXTDOMAIN); ?></h2>
+	<h2><?php _e('City Page Variables', JV_TEXTDOMAIN); ?></h2>
 	<p><?php _e('Create at least one variable to unblock "Theme Variables" page.', JV_TEXTDOMAIN); ?></p>
 	
 	<h2 class="nav-tab-wrapper">
@@ -33,6 +33,9 @@
 						<select name="jv_settings[type][]">
 							<option value="text" selected="selected"><?php _e('Text Input', JV_TEXTDOMAIN); ?></option>
 							<option value="textarea"><?php _e('Textarea', JV_TEXTDOMAIN); ?></option>
+							<option value="date" <?php echo selected($var['type'], 'date'); ?>><?php _e('Date', JV_TEXTDOMAIN); ?></option>
+							<option value="color" <?php echo selected($var['type'], 'color'); ?>><?php _e('Color', JV_TEXTDOMAIN); ?></option>
+							<option value="image" <?php echo selected($var['type'], 'image'); ?>><?php _e('Image', JV_TEXTDOMAIN); ?></option>
 						</select>
 					</td>
 					<td class="td_input"><input type="text" name="jv_settings[slug][]" value="" class="regular-text" /></td>
@@ -47,6 +50,9 @@
 						<select name="jv_settings[type][]">
 							<option value="text" <?php echo selected($var['type'], 'text'); ?>><?php _e('Text Input', JV_TEXTDOMAIN); ?></option>
 							<option value="textarea" <?php echo selected($var['type'], 'textarea'); ?>><?php _e('Textarea', JV_TEXTDOMAIN); ?></option>
+							<option value="date" <?php echo selected($var['type'], 'date'); ?>><?php _e('Date', JV_TEXTDOMAIN); ?></option>
+							<option value="color" <?php echo selected($var['type'], 'color'); ?>><?php _e('Color', JV_TEXTDOMAIN); ?></option>
+							<option value="image" <?php echo selected($var['type'], 'image'); ?>><?php _e('Image', JV_TEXTDOMAIN); ?></option>
 						</select>
 					</td>
 					<td class="td_input"><input type="text" name="jv_settings[slug][]" value="<?php echo esc_attr($slug); ?>" class="regular-text" /></td>

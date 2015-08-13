@@ -1,13 +1,9 @@
 <?php
 /*
-Plugin Name: Just Variables for Wordpress
-Plugin URI: http://justcoded.com/just-labs/just-wordpress-theme-variables-plugin/
-Description: This plugin add custom page with theme text variables to use inside the templates.
+Plugin Name: Startup Week Variables for Wordpress
+Description: This is a fork of Just Variables with added functionality - forked from mfrolov's fork
 Tags: theme, variables, template, text data
-Author: Alexander Prokopenko
-Author URI: http://justcoded.com/
-Version: 1.1
-Donate link: http://justcoded.com/just-labs/just-wordpress-theme-variables-plugin/#donate
+Author: aprokopenko / mfrolov / Alex P. Gates
 */
 
 define('JV_ROOT', dirname(__FILE__));
@@ -67,7 +63,7 @@ function jv_get_variable_value( $var ){
  *	@param bool   $echo  print variable by default.
  *	@return string  return variable value or NULL
  */
-function just_variable( $var, $echo = true ){
+function sw_variable( $var, $echo = true ){
 	$value = jv_get_variable_value( $var );
 	if( !is_null($value) && $echo ){
 		echo $value;
@@ -87,7 +83,7 @@ function just_variable_shortcode( $atts ){
 		return '';
 	}
 	else{
-		return just_variable( $atts['code'], false );
+		return sw_variable( $atts['code'], false );
 	}
 }
 add_shortcode('justvar', 'just_variable_shortcode');

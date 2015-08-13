@@ -13,7 +13,7 @@ function jv_theme_variables_menu() {
 
 	$theme_page = add_theme_page(
 		__( 'Theme Variables', JV_TEXTDOMAIN ),   // Name of page
-		__( 'Theme Variables', JV_TEXTDOMAIN ),   // Label in menu
+		__( 'City Settings', JV_TEXTDOMAIN ),   // Label in menu
 		'edit_theme_options',                    // Capability required
 		'jv_theme_vars',                         // Menu slug, used to uniquely identify the page
 		'jv_theme_vars_admin_page' 			// Function that renders the options page
@@ -39,6 +39,26 @@ function jv_theme_variables_register_settins(){
  */
 function jv_theme_vars_admin_page(){
 	?>
+<script language="JavaScript">
+var clicked_button;
+jQuery(document).ready(function() {
+jQuery('.upload_image_button').click(function() {
+	clicked_button = this.id;
+	console.log(clicked_button);
+	formfield = jQuery(this).attr('name');
+	tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+	return false;
+});
+
+window.send_to_editor = function(html) {
+	console.log(clicked_button);
+	imgurl = jQuery('img',html).attr('src');
+	jQuery('#input_'+clicked_button).val(imgurl);
+	tb_remove();
+}
+
+});
+</script>
 	<div class="wrap">
 		<?php screen_icon(); ?>
 		<h2><?php printf( __( '%s Theme Variables', JV_TEXTDOMAIN ), get_current_theme() ); ?></h2>
@@ -49,11 +69,11 @@ function jv_theme_vars_admin_page(){
 				settings_fields( 'jv_theme_vars' );
 				do_settings_sections( 'jv_theme_vars' );
 
-				$theme_variables = get_site_option('jv_variables');
+				$theme_variables = get_option('jv_variables');
 				$values = get_option('jv_values');
 			?>
 			<p><?php _e('You can use the text variables below in your template files or post content with shortcode.', JV_TEXTDOMAIN ); ?></p>
-			<p><?php _e('Template files usage example: <code>&lt;?php just_variable( "code for variable" ); ?&gt;</code><br/>Shortcode example: <code>[justvar code="code for variable"]</code>', JV_TEXTDOMAIN ); ?></p>
+			<p><?php _e('Template files usage example: <code>&lt;?php sw_variable( "code for variable" ); ?&gt;</code><br/>Shortcode example: <code>[justvar code="code for variable"]</code>', JV_TEXTDOMAIN ); ?></p>
 			<table class="form-table">
 			<tbody>
 				<?php
@@ -67,6 +87,20 @@ function jv_theme_vars_admin_page(){
 							<input class="regular-text" type="text" value="<?php echo esc_attr($value); ?>" name="jv_values[<?php echo $slug; ?>]">
 						<?php elseif( $var['type'] == 'textarea' ) : ?>
 							<textarea name="jv_values[<?php echo $slug; ?>]" cols="80" rows="3"><?php echo esc_html($value); ?></textarea>
+						<?php elseif( $var['type'] == 'date' ) : ?>
+							<input class="regular-text" type="date" value="<?php echo esc_attr($value); ?>" name="jv_values[<?php echo $slug; ?>]">
+						<?php elseif( $var['type'] == 'color' ) : ?>
+							<input class="color-input" type="color" value="<?php echo esc_attr($value); ?>" name="jv_values[<?php echo $slug; ?>]">
+						<?php elseif( $var['type'] == 'image' ) : ?>
+							<?php 
+							// does an image already exist? 
+							if(esc_attr($value) != ''){
+								$image_preview = $value;
+								echo '<img src="'.$image_preview.'" height="200px"><br>';
+							}
+							?>
+							<input class="upload_image" type="text" size="36" id="input_<?php echo $slug; ?>" name="jv_values[<?php echo $slug; ?>]" value="<?php echo $value; ?>" />
+							<input class="upload_image_button" id="<?php echo $slug; ?>" type="button" value="Upload Image" />
 						<?php endif; ?>
 					</td>
 				</tr>

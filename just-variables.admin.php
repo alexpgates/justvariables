@@ -13,13 +13,14 @@
 	add_action( 'admin_print_styles', 'jv_admin_styles' );
 	function jv_admin_styles( $hook_suffix ) {
 		wp_enqueue_style( 'just_variables', plugins_url( 'assets/styles.css' , __FILE__ ) );
+		wp_enqueue_style('thickbox');
 	}
 
 	add_action( 'admin_print_scripts', 'jv_admin_scripts' );
 	function jv_admin_scripts( $hook_suffix ) {
 		wp_enqueue_script( 'just_variables',
 				plugins_url( 'assets/settings_page.js' , __FILE__ ),
-				array( 'jquery', 'jquery-ui-sortable' ) );
+				array( 'jquery', 'jquery-ui-sortable', 'media-upload', 'thickbox' ) );
 		
 		// add text domain
 		wp_localize_script( 'just_variables', 'text_just_variables', jv_get_language_strings() );
