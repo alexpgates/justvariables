@@ -15,7 +15,7 @@ This plugin add custom page with theme text variables (configurable) to use insi
 
 == Description ==
 
-This plugin allow you to create simple text variables (single/multi-line) to use them in your theme templates after that.
+This plugin allow you to create simple text variables (single/multi-line) as well as HTML5 date selectors, color selectors, and WP image uploads to use them in your theme templates after that.
 Once you added at least one variabel - the new page Theme Variables will appear under Appearance menu.
 You can move all your text data (like copyright text, phone numbers, address etc) to variables.
 So if final client want to change this text - he can do this easily from admin without editing the template.
